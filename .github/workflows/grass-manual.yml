@@ -24,7 +24,7 @@ jobs:
       - name: Create a temporary location (needed for v<7.6)
         run: |
           grass -c EPSG:4326 grasstmploc -e
-      - name: Complile GRASS GIS addon
+      - name: Compile GRASS GIS addon
         run: |
           ADDON_NAME=$(echo ${GITHUB_REPOSITORY} | cut -d "/" -f 2)
           echo ${ADDON_NAME}
