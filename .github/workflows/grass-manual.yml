@@ -40,9 +40,10 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: "public"
+
   deploy-grass-manual:
-    nane: deploy-grass-manual
-    if: github.ref == 'refs/heads/main'
+    name: deploy-grass-manual
+    # if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     needs: build-grass-manual
 
