@@ -10,9 +10,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: awalsh128/cache-apt-pkgs-action@latest
+        with:
+          packages: grass grass-dev grass-doc wget make
+          # version: 1.0
       - name: Install dependencies
         run: |
-          apt-get install -y -qq grass grass-dev grass-doc wget make
+          # apt-get install -y -qq grass grass-dev grass-doc wget make
           mkdir public
           # some files are not installed properly, get them online
           (cd public && wget https://grass.osgeo.org/grass74/manuals/grass_logo.png)
