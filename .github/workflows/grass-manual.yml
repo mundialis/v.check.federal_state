@@ -36,7 +36,7 @@ jobs:
           # put the compile documentation to the public directory
           # public name is convention for published web pages
           cp -r build/docs/html/* public/
-          mv public/${ADDON_NAME}.html public/index.html
+          cp public/${ADDON_NAME}.html public/index.html
       - name: Reset URL
         run: |
           sed -i "s+<a href=\"\">${ADDON_NAME} source code</a>+<a href=\"https://github.com/${GITHUB_REPOSITORY}\">${ADDON_NAME} source code</a>+g" public/index.html
