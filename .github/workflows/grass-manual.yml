@@ -2,7 +2,7 @@ name: GRASS GIS addon manual
 
 on:
   push:
-    branches: [ main ]
+    branches: [ GRASSmanual ]
 
 jobs:
   build-grass-manual:
