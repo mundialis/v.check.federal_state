@@ -116,9 +116,8 @@ def get_federal_state_in_aoi(
         # save optional
         if save_file_path:
             try:
-                f = open(save_file_path, mode="w")
-                f.write(",".join(fd_overlay))
-                f.close()
+                with open(save_file_path, mode="w") as fs_file:
+                    fs_file.write(",".join(fd_overlay))
             except FileNotFoundError:
                 grass.warning(
                     "Could not save output as file. "
@@ -132,6 +131,7 @@ def get_federal_state_in_aoi(
 
 
 def main():
+    """Main function of v.check.federal_state addon"""
     global rm_vectors
 
     area = options["aoi"]
