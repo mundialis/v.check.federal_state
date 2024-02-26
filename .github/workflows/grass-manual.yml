@@ -39,8 +39,10 @@ jobs:
           cp public/${ADDON_NAME}.html public/index.html
       - name: Reset URL
         run: |
-          sed -i "s+<a href=\"\">${ADDON_NAME} source code</a>+<a href=\"https://github.com/${GITHUB_REPOSITORY}\">${ADDON_NAME} source code</a>+g" public/index.html
+          sed -i "s+file:///usr/lib/grass78/docs/html/+https://grass.osgeo.org/grass83/manuals/+g" public/index.html
           sed -i "s+(<a href=\"\">history</a>)+(<a href=\"https://github.com/${GITHUB_REPOSITORY}/commits/main/\">history</a>)+g" public/index.html
+          sed -i "s+<a href=\"\">+<a href=\"https://github.com/${GITHUB_REPOSITORY}\">+g" public/index.html
+          # sed -i "s+<a href=\"\">${ADDON_NAME} source code</a>+<a href=\"https://github.com/${GITHUB_REPOSITORY}\">${ADDON_NAME} source code</a>+g" public/index.html
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
