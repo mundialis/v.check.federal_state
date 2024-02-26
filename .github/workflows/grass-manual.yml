@@ -26,7 +26,7 @@ jobs:
           grass -c EPSG:4326 grasstmploc -e
       - name: Complile GRASS GIS addon
         run: |
-          ADDON_NAME=$(${GITHUB_REPOSITORY} | cut -d "/" -f 2)
+          ADDON_NAME=$(echo ${GITHUB_REPOSITORY} | cut -d "/" -f 2)
           echo ${ADDON_NAME}
           # expecting name of module is repository name
           grass grasstmploc/PERMANENT --exec g.extension extension=${ADDON_NAME} url=. prefix=build --verbose
