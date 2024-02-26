@@ -32,6 +32,7 @@ jobs:
           grass grasstmploc/PERMANENT --exec g.extension extension=${ADDON_NAME} url=. prefix=build --verbose
       - name: Move manual to public folder
         run: |
+          ADDON_NAME=$(echo ${GITHUB_REPOSITORY} | cut -d "/" -f 2)
           # put the compile documentation to the public directory
           # public name is convention for published web pages
           cp -r build/docs/html/* public/
