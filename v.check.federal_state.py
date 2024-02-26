@@ -77,18 +77,13 @@ from grass_gis_helpers.open_geodata_germany.federal_state import (
 
 
 rm_vectors = []
-path_to_zipfile = None
 # PID for unambiguous layer naming
 PID = f"{grass.tempname(8)}_{os.getpid()}"
 
 
 def cleanup():
-    # remove unzipped federal state data in tempdir-folder
-    rm_dirs = []
-    if path_to_zipfile:
-        rm_dirs.append(path_to_zipfile)
-
-    general_cleanup(rm_vectors=rm_vectors, rm_dirs=rm_dirs)
+    """Using general cleanup to remove vectors"""
+    general_cleanup(rm_vectors=rm_vectors)
 
 
 def get_federal_state_in_aoi(
@@ -138,7 +133,6 @@ def get_federal_state_in_aoi(
 
 def main():
     global rm_vectors
-    global path_to_zipfile
 
     area = options["aoi"]
     input_fs = options["federal_states"]

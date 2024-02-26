@@ -31,6 +31,8 @@ import grass.script as grass
 
 
 class TestVCheckFederalState(TestCase):
+    """Test class to test v.check.federal_state"""
+
     polygon_files = [
         file for file in os.listdir("data") if file.endswith(".geojson")
     ]
@@ -46,22 +48,25 @@ class TestVCheckFederalState(TestCase):
     output_name = f"federal_states_{pid}"
 
     @classmethod
-    def setUpClass(self):
+    # pylint: disable=invalid-name
+    def setUpClass(cls):
         """Ensures expected computational region and generated data"""
         # import polygons for testing
         [
-            self.runModule("v.import", input=f"data/{x}", output=y)
-            for x, y in zip(self.polygon_files, self.polygon_grass)
+            cls.runModule("v.import", input=f"data/{x}", output=y)
+            for x, y in zip(cls.polygon_files, cls.polygon_grass)
         ]
 
     @classmethod
-    def tearDownClass(self):
+    # pylint: disable=invalid-name
+    def tearDownClass(cls):
         """Remove the temporary region and generated data"""
         [
-            self.runModule("g.remove", type="vector", name=x, flags="f")
-            for x in self.polygon_grass
+            cls.runModule("g.remove", type="vector", name=x, flags="f")
+            for x in cls.polygon_grass
         ]
 
+    # pylint: disable=invalid-name
     def tearDown(self):
         """Remove the outputs created
         This is executed after each test run.
@@ -121,7 +126,7 @@ class TestVCheckFederalState(TestCase):
             )
             print(f"Running test for {fs_abb} DONE.")
 
-    def test_poly_not_in_DE(self):
+    def test_poly_not_in_de(self):
         """Tests the case when polygon is not in Germany.
         Should return message, that polygon is not in Germany.
         """
@@ -155,7 +160,7 @@ class TestVCheckFederalState(TestCase):
             "Detected federal states should be NI and HB",
         )
 
-    def test_multiple_notDe(self):
+    def test_multiple_not_de(self):
         """Tests the case when polygon lies partly in Germany"""
         polygon_multi_land = f"polygon_nrw_notDe_multi_{self.pid}"
         federal_state_out = grass.parse_command(
@@ -204,6 +209,7 @@ class TestVCheckFederalState(TestCase):
         self.assertModule(v_check)
 
     def test_saving_file(self):
+        """Testing the saving of the federal state file"""
         filepath_ = grass.tempdir()
         filepath_cs1 = os.path.join(filepath_, f"cs1{self.pid}")
         filepath_cs2 = os.path.join(filepath_, f"cs1{self.pid}")
