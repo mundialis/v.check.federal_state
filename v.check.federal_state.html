@@ -1,42 +1,42 @@
 <h2>DESCRIPTION</h2>
 
 <em>v.check.federal_state</em> checks in which German federal state an area of interest is located.
-The vector map input (area of interest) has to be given in the GRASS DB.
+The vector map aoi (area of interest) has to be given in the GRASS DB.
 The data for the federal states boundaries are downloaded from the BKG.
 To speed up the module, the federal state boundaries can als be given as optional input: <b>federal_states</b>.
 To generate this input the module can be run once with the optinal option <b>output</b>.
 The returning output-map can then be used as <b>federal_states</b> input in following module runs (See example below).
-Further the optional option <b>filepath</b> can be set. With this option the printed output (federal state of given polygon)
-will be written into a file, defined by <b>filepath</b>. If the polygon is not in Germany, no file be generated.
+Further the optional option <b>federal_state_file</b> can be set. With this option the printed output (federal state of given polygon)
+will be written into a file, defined by <b>federal_state_file</b>. If the polygon is not in Germany, no file be generated.
 <h2>EXAMPLE</h2>
 
 <h3>Check federal state for a given polygon in Hamburg, named=poly_HH.</h3>
 
 <div class="code"><pre>
-v.check.federal_state input=poly_HH
+v.check.federal_state aoi=poly_HH
 </pre></div>
 
 <h3>Check federal state for a given polygon in Hamburg and save it in a file</h3>
 <div class="code"><pre>
-v.check.federal_state input=poly_HH filepath=poly_HH_federal_state.txt
+v.check.federal_state aoi=poly_HH federal_state_file=poly_HH_federal_state.txt
 </pre></div>
 
 <h3>Check federal state for a given polygon in Hamburg, named 'poly_HH', and save the federal
     state boundaries as 'federal_states'.</h3>
 
 <div class="code"><pre>
-v.check.federal_state input=poly_HH output=federal_states
+v.check.federal_state aoi=poly_HH output=federal_states
 </pre></div>
 
 <h3>Save federal states data, to avoid downloading them each time calling v.check.federal_state.</h3>
 First step: Run module once, to generate federal_states output
 <div class="code"><pre>
-v.check.federal_state input=poly_HH output=federal_states
+v.check.federal_state aoi=poly_HH output=federal_states
 </pre></div>
 Second step: Next time the module can be run by giving federal_states as input
 (faster, because this avoids downloading data each time running module)
 <div class="code"><pre>
-v.check.federal_state input=poly_HH federal_states=federal_states
+v.check.federal_state aoi=poly_HH federal_states=federal_states
 </pre></div>
 
 
