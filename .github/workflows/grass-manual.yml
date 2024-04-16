@@ -1,6 +1,8 @@
 name: GRASS GIS addon manual
 
-on: [push]
+on: # [push]
+  push:
+    branches: [ GRASSmanual ]
 jobs:
   grass-manual:
     uses: mundialis/github-workflows/.github/workflows/grass-manual.yml@grass-addon-manualpage
