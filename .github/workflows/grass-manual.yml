@@ -1,46 +1,6 @@
 name: GRASS GIS addon manual
 
-on: # [push]
-  push:
-    branches: [ GRASSmanual ]
-
+on: [push]
 jobs:
-  build-grass-manual:
-    name: build-grass-manual
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Creation of GRASS GIS addon manual
-        run: |
-          ADDON_NAME=$(echo ${GITHUB_REPOSITORY} | cut -d "/" -f 2)
-          docker build -f docker-manual/Dockerfile --build-arg ADDON_NAME=$ADDON_NAME --build-arg GITHUB_REPOSITORY=$GITHUB_REPOSITORY -t grass-addon-manual .
-          ID=$(docker create grass-addon-manual)
-          echo $ID
-          docker cp $ID:/src/build/docs/html/ public
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: "public"
-
-  deploy-grass-manual:
-    name: deploy-grass-manual
-    # if: github.ref == 'refs/heads/main'
-    runs-on: ubuntu-latest
-    needs: build-grass-manual
-
-    permissions:
-      pages: write
-      id-token: write
-
-    environment:
-      # environment created automatically by GitHub
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-
-    steps:
-      - name: Reset URL
-        run: |
-          echo  ${{ steps.deployment.outputs.page_url }}
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+  grass-manual:
+    uses: mundialis/github-workflows/.github/workflows/grass-manual.yml@grass-addon-manualpage
