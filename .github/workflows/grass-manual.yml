@@ -1,6 +1,8 @@
 name: GRASS GIS addon manual
 
-on: [push]
+on:
+  push:
+    branches: [ main ]
 
 jobs:
   grass-manual:
