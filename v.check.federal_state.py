@@ -75,7 +75,6 @@ from grass_gis_helpers.open_geodata_germany.federal_state import (
     import_administrative_boundaries,
 )
 
-
 rm_vectors = []
 # PID for unambiguous layer naming
 PID = f"{grass.tempname(8)}_{os.getpid()}"
@@ -133,6 +132,7 @@ def get_federal_state_in_aoi(
 def main():
     """Main function of v.check.federal_state addon"""
     global rm_vectors
+    rm_vectors = []
 
     area = options["aoi"]
     input_fs = options["federal_states"]
